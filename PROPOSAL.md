@@ -6,11 +6,11 @@ names here.
        
 # Intentions:
 
-A statement of the problem you are solving and/or a high level description of the project.
+A interprocess program for playing Texas Hold'em poker, with players being able to connect from different machines
     
 # Intended usage:
 
-A description as to how the project will be used (describe the user interface).
+The client will join the server and then the server will wait for another client or more. It will ask each client to 
   
 # Technical Details:
 
