@@ -5,7 +5,7 @@ Texas Hold'em Poker
 Samin Alam, Brandon Chao, Zac Moore
        
 # Intentions:
-A interprocess program for playing Texas Hold'em poker, with players being able to connect from different machines.
+A interprocess program for playing Texas Hold'em Poker, with players being able to connect from different machines.
     
 # Intended usage:
 The client will join the server and then the server will wait for another client or more. It will ask each client to confirm that they are ready to play. Once at least two players are ready, the game will start. Players will start with some "chips" to be used during rounds of Texas Hold'em poker. Players who run out of chips will no longer be able to play in the current room until the game ends. The game ends either when only one non-broke player is still connected, or when only one player has chips left.
