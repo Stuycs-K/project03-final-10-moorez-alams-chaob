@@ -14,6 +14,7 @@ The client will join the server and then the server will wait for another client
 Pipes, sockets, and processes (forking + exec) will be used to allow for simultaneous client connection.
 Files will be created and append player data per round (i.e how many chips each player has each round).
 Signals can be used to allow for players to elegantly disconnect during a live round.
+Structs can be used to send the card data of each players' hand and the current board.
 
 # Intended pacing:
 Jan 8th - Poker game functional on local computer.
