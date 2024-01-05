@@ -14,9 +14,8 @@
 #ifndef POKER_H
 #define POKER_H
 
-struct Card{ // 0-12 is two-ace, 0-3 is spades, hearts, diamonds, clubs
+struct Card{ // 0-12 is two-ace spades, 13-25 is two-ace hearts, 26-38 diamonds, 39-51 clubs
     int face;
-    int suit;
 };
 
 struct Hand{
