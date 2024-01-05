@@ -5,16 +5,17 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <errno.h>
+#include <string.h>
 
 #ifndef PLAYERDATA_H
 #define PLAYERDATA_H
 
 struct playerData {
     int numChips;
-    char[2] playerInitials;
-}
+    char playerInitials[2];
+};
 
-void writeData (int numChips, char[] playerInitials);
+void writeData (int numChips, char playerInitials[]);
 void readData ();
 
 #endif
