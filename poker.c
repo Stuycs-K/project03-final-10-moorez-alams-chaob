@@ -14,32 +14,65 @@ char* cardName(struct Card n){ // returns card name
 
 struct Card drawCard(){ // returns the card that it drew, adds drawn card to drawnCards array
     int slot = 0;
+    int numCardsLeft = 0;
     struct Card cardsLeft[52];
+
+    while (drawnCards[slot].id >= 0){ // set slot to the current empty slot in drawnCards to be populated
+        slot++;
+    }
 
     int i = 0;
     while (i < 52){
-        if (i == drawnCards[slot].id){
-            slot++;
+        int drawn = 0; // a boolean that represents that the current "i" is an id that is assumed to not be drawn (drawn set to false)
+
+        for (int j = 0; (j < slot) && (!drawn); j++){
+            if (i == drawnCards[j].id){
+                drawn = 1; // if the current "i" is contained in drawnCards, then it has been drawn.
+            }
         }
-        else{
+
+        if (!drawn){
             struct Card card;
             card.id = i;
             card.face = i % 13;
             card.suit = i / 13;
-            cardsLeft[i - slot] = card;
+            cardsLeft[numCardsLeft++] = card;
         }
         i++;
     }
 
-    drawnCards[slot] = cardsLeft[rand() % (i - slot)];
-    printf("Drew a card!: %s\n", cardName(drawnCards[slot]));
+    drawnCards[slot] = cardsLeft[rand() % numCardsLeft];
+    printf("Drew a card!: %s, ID: %d\n", cardName(drawnCards[slot]), drawnCards[slot].id);
 
     return drawnCards[slot];
 }
 
+void clearBoard(){ // note that this currently does not account for player hands
+    for (int i = 0; i < 52; i++){
+        struct Card card;
+        card.id = -1; // empty card
+        card.face = -1; // empty card
+        card.suit = -1; // empty card
+        drawnCards[i] = card;
+    }
+}
+
 int main(){
     srand(time(NULL));
-    drawCard();
+    
+    clearBoard(); // must be run before any game/round starts.
+
+    for (int i = 0; i < 52; i++){
+        drawCard();
+    }
+
+    clearBoard();
+    printf("\nBoard cleared.\n\n");
+
+    for (int i = 0; i < 3; i++){
+        drawCard();
+        drawCard();
+    }
 
     return 0;
 }
