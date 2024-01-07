@@ -10,18 +10,19 @@
 #include <sys/types.h>
 #include <sys/socket.h> 
 #include <netdb.h>
+#include <time.h>
 
 #ifndef POKER_H
 #define POKER_H
 
 struct Card{ // 0-12 is two-ace spades, 13-25 is two-ace hearts, 26-38 diamonds, 39-51 clubs
+    int id; // to make random draw easier
     int face;
+    int suit;
 };
 
 struct Hand{
     struct Card combination[5];
 };
-
-
 
 #endif
