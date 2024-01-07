@@ -3,16 +3,13 @@
 struct Card drawnCards[52]; // stores all cards drawn in a round, including player hands.
 
 char* cardName(struct Card n){ // returns card name
-    int id = n.id;
-    char* name;
-    
-    char* face[13];
-    char* suit[4];
+    char* face[13] = {"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"};
+    char* suit[4] = {"Spades", "Hearts", "Diamonds", "Clubs"};
 
-    face[0], face[1], face[2], face[3], face[4], face[5], face[6], face[7], face[8], face[9], face[10], face[11], face[12] = "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King";
-    suit[0], suit[1], suit[2], suit[3] = "Spades", "Hearts", "Diamonds", "Clubs";
+    char* name = malloc(strlen(face[n.face]) + strlen(" of ") + strlen(suit[n.suit]) + 1); // +1 for the null terminator
+    sprintf(name, "%s of %s", face[n.face], suit[n.suit]);
 
-    name = strcat(strcat(n.face, " of "), n.suit);
+    return name;
 }
 
 struct Card drawCard(){ // returns the card that it drew, adds drawn card to drawnCards array
@@ -35,7 +32,14 @@ struct Card drawCard(){ // returns the card that it drew, adds drawn card to dra
     }
 
     drawnCards[slot] = cardsLeft[rand() % (i - slot)];
-    printf(strcat(strcat("Drew a card!: ", cardName(drawnCards[slot])), "\n"));
+    printf("Drew a card!: %s\n", cardName(drawnCards[slot]));
 
     return drawnCards[slot];
+}
+
+int main(){
+    srand(time(NULL));
+    drawCard();
+
+    return 0;
 }
