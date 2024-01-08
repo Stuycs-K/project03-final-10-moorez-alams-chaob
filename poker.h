@@ -15,7 +15,7 @@
 #ifndef POKER_H
 #define POKER_H
 
-struct Card{ // 0-12 is two-ace spades, 13-25 is two-ace hearts, 26-38 is two-ace diamonds, 39-51 is two-ace clubs
+struct Card{ // 0-12 is two-ace clubs, 13-25 is two-ace diamonds, 26-38 is two-ace hearts, 39-51 is two-ace spades
     int id; // to make random draw easier
     int face;
     int suit;

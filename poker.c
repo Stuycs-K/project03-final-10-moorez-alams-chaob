@@ -42,7 +42,7 @@ struct Card drawCard(){ // returns the card that it drew, adds drawn card to dra
     }
 
     drawnCards[slot] = cardsLeft[rand() % numCardsLeft];
-    printf("Drew a card!: %s, ID: %d\n", cardName(drawnCards[slot]), drawnCards[slot].id);
+    //printf("Drew a card!: %s, ID: %d\n", cardName(drawnCards[slot]), drawnCards[slot].id);
 
     return drawnCards[slot];
 }
