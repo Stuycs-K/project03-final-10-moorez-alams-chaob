@@ -83,7 +83,7 @@ int comboFlush(struct Card cards[5]){
     }
 }
 
-int evalHand(struct hand* playerHand){
+int evalHand(struct Hand* playerHand){
     
     int handStrength = 0;
     struct Card cards[5] = playerHand->combination;
@@ -113,4 +113,12 @@ int evalHand(struct hand* playerHand){
     // them align better with the strength of each hand in actual poker
 
     return handStrength;
+}
+
+int main(){
+    
+    struct Hand *pointer = malloc(sizeof(struct Hand));
+    
+    
+    
 }
