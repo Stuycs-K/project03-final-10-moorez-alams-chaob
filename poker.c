@@ -3,8 +3,8 @@
 struct Card drawnCards[52]; // stores all cards drawn in a round, including player hands.
 
 char* cardName(struct Card n){ // returns card name
-    char* face[13] = {"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King"};
-    char* suit[4] = {"Spades", "Hearts", "Diamonds", "Clubs"};
+    char* face[13] = {"Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"};
+    char* suit[4] = {"Clubs", "Diamonds", "Hearts", "Spades"};
 
     char* name = malloc(strlen(face[n.face]) + strlen(" of ") + strlen(suit[n.suit]) + 1); // +1 for the null terminator
     sprintf(name, "%s of %s", face[n.face], suit[n.suit]);
@@ -14,7 +14,7 @@ char* cardName(struct Card n){ // returns card name
 
 struct Card drawCard(){ // returns the card that it drew, adds drawn card to drawnCards array
     int slot = 0;
-    int numCardsLeft = 0;
+    int numCardsLeft = 0; // after "i" has reached 52, this number will show how many cards are left to choose from in total. it also serves as sort of a "slot" but for the cardsLeft array.
     struct Card cardsLeft[52];
 
     while (drawnCards[slot].id >= 0){ // set slot to the current empty slot in drawnCards to be populated
@@ -47,7 +47,9 @@ struct Card drawCard(){ // returns the card that it drew, adds drawn card to dra
     return drawnCards[slot];
 }
 
-void clearBoard(){ // note that this currently does not account for player hands
+
+
+void clearBoard(){ // sets drawnCards back to all empty cards.
     for (int i = 0; i < 52; i++){
         struct Card card;
         card.id = -1; // empty card
@@ -68,11 +70,6 @@ int main(){
 
     clearBoard();
     printf("\nBoard cleared.\n\n");
-
-    for (int i = 0; i < 3; i++){
-        drawCard();
-        drawCard();
-    }
 
     return 0;
 }
