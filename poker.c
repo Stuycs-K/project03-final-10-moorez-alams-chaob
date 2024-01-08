@@ -112,5 +112,5 @@ int evalHand(struct hand* playerHand){
     // might adjust the strength that each combination gives to make
     // them align better with the strength of each hand in actual poker
 
-    
+    return handStrength;
 }
