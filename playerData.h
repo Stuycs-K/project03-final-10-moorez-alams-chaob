@@ -6,16 +6,19 @@
 #include <sys/types.h>
 #include <errno.h>
 #include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
 
 #ifndef PLAYERDATA_H
 #define PLAYERDATA_H
 
 struct playerData {
     int numChips;
+    int roundNumber;
     char playerInitials[2];
 };
 
-void writeData (int numChips, char playerInitials[]);
+void writeData (int numChips, int roundNumber, char playerInitials[]);
 void readData ();
 
 #endif
