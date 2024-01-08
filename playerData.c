@@ -2,9 +2,10 @@
 
 void writeData (int numChips, char playerInitials[]) {
     //define struct
-    struct playerData data;
-    data.numChips = numChips;
-    strcpy(playerInitials, data.playerInitials);
+    struct playerData *data;
+    data = malloc(sizeof(struct playerData));
+    data -> numChips = numChips;
+    strcpy(data -> playerInitials, playerInitials);
     printf("::%s\n", playerInitials);
 }
 
