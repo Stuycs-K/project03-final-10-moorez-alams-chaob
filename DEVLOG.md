@@ -14,6 +14,9 @@ Zac worked on implementing a way for the player's number of "chips" they had in 
 ## 2024-01-08 (1:00 AM) Samin, Brandon, Zac
 Brandon changed up how the card struct was going to be structured, instead giving each card an "id" that is an integer connected to their respective face and suits. He also wrote a function for drawing cards that accounted for redraws as well as a function that cleared the board. Samin worked on evaluting the player's hand under the new card system, using multiple helper functions to calculate the value of each poker combination within one hand. Zac worked on taking player data, using a struct to capture the player's initials and chip amount.
 
+## 2024-01-09 (3:35 PM) Samin, Brandon
+Brandon focused on making sure that all the combination related functions fit all the edge cases, using sorting to optimize finding the straight combinations and royal flush. Samin continued to work on setting up the single client server, implementing with the ability to execute commands, which would then later be used with forking so that multiple people can connect. 
+
 ## Player 1
 
 ### 2024-01-02 - Brief description
