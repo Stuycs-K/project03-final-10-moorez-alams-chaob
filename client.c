@@ -5,3 +5,9 @@ int err(){
     printf("%s\n", strerror(errno));
     exit(1);
 }
+
+int main(){
+    
+    
+    
+}
