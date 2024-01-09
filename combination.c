@@ -1,122 +1,39 @@
 #include "poker.h"
 
-int comboHigh(struct Card cards[5]){
-    // every hand has a highest face card, iterate through to find
-    int comboStrength = 0;
-    for (int i = 0; i < 5; i++){ // goes through once for each card
-        if (cards[i].face > comboStrength) combostrength = cards[i].face;
-    }
-    return comboStrength;
+struct Hand sortHand(struct Hand hand){ // will return a sorted version of a given hand based on face value. suit values will be ignored.
+
 }
 
-int comboPair(struct Card cards[5]){
-    // for a hand to be have a pair, check each face and see if they
-    // have 2 members in the hand
-    int comboStrength = 0;
-    for (int i = 0; i < 13; i++){ // goes through once for each face
-        int pair = 0;
-        for (int j = 0; j < 5; j++){ // goes through once for each card
-            if (cards[j].face == i) pair++;
-        }
-        if (pair == 2) comboStrength += 2;
-    }
-    return comboStrength;
-}
+int evalHand(struct Hand hand){ // returns a score based on the strength of the player's hand.
+    //check from best to worst, so the best hand met will end the evaluation
 
-int comboThree(struct Card cards[5]){
-    // for a hand to be have three of a kind, check each face and see if they
-    // have 3 members in the hand
-    int comboStrength = 0;
-    for (int i = 0; i < 13; i++){ // goes through once for each face
-        int three = 0;
-        for (int j = 0; j < 5; j++){ // goes through once for each card
-            if (cards[j].face == i) three++;
-        }
-        if (three == 3) comboStrength += 3;
-    }
-    return comboStrength;
-}
-
-int comboFour(struct Card cards[5]){
-    // for a hand to be have four of a kind, check each face and see if they
-    // have 4 members in the hand
-    int comboStrength = 0;
-    for (int i = 0; i < 13; i++){ // goes through once for each face
-        int four = 0;
-        for (int j = 0; j < 5; j++){ // goes through once for each card
-            if (cards[j].face == i) four++;
-        }
-        if (four == 4) comboStrength += 4;
-    }
-    return comboStrength;
-}
-
-
-int comboStraight(struct Card cards[5]){
-    // for a hand to be a straight, every card face must be
-    // within a difference of 1-4 from every other card, but
-    // not 0 (to account for doubles) or greater than 4
-    // assumed all hands are straights, then iterated to eliminate
-    // non-straight hands
-    int comboStrength = 5;
-    for (int i = 0; i < 5; i++){ // goes through each card (base card)
-        for (int j = 0; j < 4; j++){ // goes through each card (comparison)
-            // no need to check all cards as 5th card will be checked anyway
-            if (i != j){
-                if (cards[i].face > cards[j].face + 4 &&
-                    cards[i].face < cards[j].face - 4 &&
-                    cards[i].face == cards[j].face)
-                    comboStrength = 0;
+    //***SORT HAND HERE***// struct Hand sortedHand = sortHand();
+    
+    int score = 1; //equal to highest face if high card, 20 if pair, 30 if two pair, 40 if trips, 
+                   //50 if straight, 60 if flush, 70 if full house, 80 if quads, 90 if straight flush, 
+                   //100 if royal flush. these values don't have significance other than being used for comparison.
+    
+    struct Card cards[5] = hand.combination; // ***SHOULD SAY sortedHand.combination;
+    
+    //royal flush, straight flush, four of a kind, full house, flush, straight, three of a kind, two pair, pair, high card
+    
+    //check straight flush and royal flush, maybe add just flush and just straight checks in here too? 
+    for (int i = 0; (i < 4) && (score > 0); i++){
+        previousSuit = cards[i].suit;
+        previousFace = cards[i].face;
+        nextSuit = cards[i+1].suit;
+        nextFace = cards[i+1].face;
+        if (nextSuit == previousSuit && (nextFace == previousFace + 1 || nextFace == 0 && previousFace == 12)){
+            score = 90;
+            if (i == 3){
+                if (cards[i+1].face = 12){
+                    score = 100;
+                }
+                return score;
             }
         }
-    }
-    return comboStrength;
-}
-
-int comboFlush(struct Card cards[5]){
-    // for a card to be a flush, every card must be of the same suit
-    // i thought of a way to optimize this function by just checking
-    // if one card doesnt match the suit but i will try to implement later
-    int comboStrength = 0;
-    for (int i = 0; i < 4; i++){ // goes through once for each suit
-        int flush = 0;
-        if (card[0].suit == i)
-        for (int j = 0; j < 5; j++){ // goes through once for each card
-            if (cards[j].suit == i) flush++;
+        else{
+            score = 0;
         }
-        if (flush == 5) comboStrength = 6;
     }
-    return comboStrength;
-}
-
-int evalHand(struct hand* playerHand){
-    
-    int handStrength = 0;
-    struct Card cards[5] = playerHand->combination;
-    
-    // high (add 1)
-    handStrength += comboHigh(cards);
-    
-    // pair (add 2)
-    handStrength += comboPair(cards);
-    
-    // three of a kind (add 3)
-    handStrength += comboThree(cards);
-    
-    // four of a kind (add 4)
-    handStrength += comboFour(cards);
-    
-    // straight (add 5)
-    handStrength += comboStraight(cards);
-
-    // flush (add 6)
-    handStrength += comboFlush(cards);
-    
-    // all the subsequent poker hands (royal flush, straight flush, etc.
-    // are combinations of the previous combinations, and thus will end up
-    // being greater anyway, so no reason to check for them at all
-    // might adjust the strength that each combination gives to make
-    // them align better with the strength of each hand in actual poker
-
-    return handStrength;
 }
