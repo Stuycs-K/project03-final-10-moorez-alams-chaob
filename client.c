@@ -19,11 +19,21 @@ void parse_args(char* line, char** arg_ary){
     
 }
 
-int main(){
+int main(int argc, char *argv[]){
     
+    /*
     char* line = "telnet 127.0.0.1 9998";
     char* args[5];
     parse_args(line, args);
     execvp(args[0], args);
+    */
+    
+    struct addrinfo *hints, *server;
+    
+    hints = calloc(1, sizeof(struct addrinfo));
+    hints->ai_family = AF_INET;
+    hints->ai_socktype = SOCK_STREAM;
+    hints->ai_flags = AI_PASSIVE;
+    
     
 }

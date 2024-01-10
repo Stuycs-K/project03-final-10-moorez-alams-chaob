@@ -22,7 +22,7 @@ void parse_args(char* line, char** arg_ary){
 int main(){
     struct addrinfo *hints, *results;
     hints = calloc(1, sizeof(struct addrinfo));
-    char* PORT = "9998";
+    char* PORT = "0002";
     
     hints->ai_family = AF_INET;
     hints->ai_socktype = SOCK_STREAM;
