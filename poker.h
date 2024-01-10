@@ -23,6 +23,11 @@ struct Card{ // 0-12 is two-ace clubs, 13-25 is two-ace diamonds, 26-38 is two-a
 
 struct Hand{
     struct Card combination[5];
+    int score;
+    int altScore; // used for comparing lower pair of a two pair
 };
+
+void sortHand(struct Hand hand);
+void evalHand(struct Hand hand);
 
 #endif
