@@ -8,7 +8,7 @@ int err(){
 
 void parse_args(char* line, char** arg_ary){
     
-    int i = 0;
+    int i = 1;
     char* x;
     while(x = strsep(&line, " ")) {
         arg_ary[i] = malloc(strlen(x) + 1);
@@ -65,11 +65,12 @@ int main(){
             //if standard in, use fgets
             if (FD_ISSET(STDIN_FILENO, &read_fds)) {
                 fgets(buff, sizeof(buff), stdin);
-                buff[strlen(buff)-1]=0;
+                buff[strlen(buff) - 1]= 0;
                 char* args[16];
-                parse_args(buff, args);
-                execvp(args[0], args);
-                //printf("Recieved from terminal: '%s'\n",buff);
+                args[0] = "cowsay";
+                //parse_args(buff, args);
+                //execvp(args[0], args);
+                printf("Recieved from terminal: '%s'\n",buff);
             }
 
             // if socket
