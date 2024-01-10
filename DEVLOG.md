@@ -17,6 +17,9 @@ Brandon changed up how the card struct was going to be structured, instead givin
 ## 2024-01-09 (3:35 PM) Samin, Brandon
 Brandon focused on making sure that all the combination related functions fit all the edge cases, using sorting to optimize finding the straight combinations and royal flush. Samin continued to work on setting up the single client server, implementing with the ability to execute commands, which would then later be used with forking so that multiple people can connect. 
 
+## 2024-01-10 (3:35 PM) Samin, Brandon, Zac
+Zac worked on finishing up the file system as well as starting on the signalling system for exiting the poker game. Samin worked on the client side of his single client server, as well as working with the ability of the server to executee commands. Brandon continued to work on optimizing and the poker game to full functionality, working on evaluating a player hand and fully implementing his sorting algorithm. 
+
 ## Player 1
 
 ### 2024-01-02 - Brief description
