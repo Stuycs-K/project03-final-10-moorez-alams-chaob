@@ -57,45 +57,44 @@ void clearBoard(){ // sets drawnCards back to all empty cards.
     }
 }
 
-void sortHand(struct Hand hand){ // will return a sorted version of a given hand based on face value. suit values will be ignored.
+void sortHand(struct Hand* hand){ // will sort a given hand based on face values. suit values will be ignored.
     struct Card cards[5];
-    memcpy(cards, hand.combination, sizeof(cards));
+    memcpy(cards, hand->combination, sizeof(cards));
     int flag = 0;
-    for (int i = 0; i < 5 && flag == 0; i++){
+    for (int i = 0; (i < 4) && (flag == 0); i++){
         flag = 1;
-        for (int j = 1; j < 5; j++){
-            if (cards[j-1].face > cards[j].face){
+        for (int j = 0; j < 4-i; j++){
+            if (cards[j].face > cards[j+1].face){
                 flag = 0;
-                struct Card temp = cards[j-1];
-                cards[j-1] = cards[j];
-                cards[j] = temp;
+                struct Card temp = cards[j];
+                cards[j] = cards[j+1];
+                cards[j+1] = temp;
             }
         }
     }
-    memcpy(hand.combination, cards, sizeof(hand.combination));
+    memcpy(hand->combination, cards, sizeof(hand->combination));
 }
 
-void evalHand(struct Hand hand){ // returns a score based on the strength of the player's hand.
-    //check from best to worst, so the best hand met will end the evaluation
+void evalHand(struct Hand* hand){ // sets a score based on the strength of the player's hand.
 
     sortHand(hand);
 
     //0-12 high card, 13-25 pair, 26-38 two pair, altScore used for lower pair (0-12), 39-51 trips, 
     //52-61 straight (5-ace), 62-74 flush, 75-87 full house, 88-100 quads, 101-110 straight flush (royal flush is 110)
 
-    hand.score = 1;
+    hand->score = 1;
 
     //check straight flush and royal flush, maybe add just flush and just straight checks in here too?
-    for (int i = 0; (i < 4) && (hand.score > 0); i++){
-        int previousSuit = hand.combination[i].suit;
-        int previousFace = hand.combination[i].face;
-        int nextSuit = hand.combination[i+1].suit;
-        int nextFace = hand.combination[i+1].face;
+    for (int i = 0; (i < 4) && (hand->score > 0); i++){
+        int previousSuit = hand->combination[i].suit;
+        int previousFace = hand->combination[i].face;
+        int nextSuit = hand->combination[i+1].suit;
+        int nextFace = hand->combination[i+1].face;
         if (nextSuit == previousSuit && (nextFace == previousFace + 1 || nextFace == 0 && previousFace == 12)){
-            hand.score = 98 + hand.combination[4].face;
+            hand->score = 98 + hand->combination[4].face;
         }
         else{
-            hand.score = 0;
+            hand->score = 0;
         }
     }
 }
@@ -116,8 +115,9 @@ int main(){
     for (int i = 0; i < 5; i++){
         testHand.combination[i] = drawCard();
     }
-    sortHand(testHand);
-    printf("%s, %s, %s, %s, %s\n", cardName(testHand.combination[0]), cardName(testHand.combination[1]), cardName(testHand.combination[2]), cardName(testHand.combination[3]), cardName(testHand.combination[4]));
+    printf("Before sort: %s, %s, %s, %s, %s\n", cardName(testHand.combination[0]), cardName(testHand.combination[1]), cardName(testHand.combination[2]), cardName(testHand.combination[3]), cardName(testHand.combination[4]));
+    sortHand(&testHand);
+    printf("After sort: %s, %s, %s, %s, %s\n", cardName(testHand.combination[0]), cardName(testHand.combination[1]), cardName(testHand.combination[2]), cardName(testHand.combination[3]), cardName(testHand.combination[4]));
 
     return 0;
 }
