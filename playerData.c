@@ -2,28 +2,30 @@
 
 void writeData (int numChips, int roundNumber, char playerInitials[]) {
     // define struct, assign values 
-    struct playerData *data;
     int dataStructSize = sizeof(struct playerData);
+    struct playerData *data = malloc(dataStructSize);
     data = malloc(dataStructSize);
     data -> numChips = numChips;
     data -> roundNumber = roundNumber;
-    strcpy(data -> playerInitials, playerInitials);
+    strncpy(data->playerInitials, playerInitials, sizeof(data->playerInitials));
     // open file, write
-    FILE* w_file = fopen("data.txt", "a");
+    FILE* w_file = fopen("data.txt", "ab");
     fwrite(data, dataStructSize, 1, w_file);
     fclose(w_file);
+    free(data);
 }
 
 void readData () {
     int dataStructSize = sizeof(struct playerData);
-    FILE* r_file = fopen("data.txt", "r");
-    struct stat s;
-    struct playerData *data;
-    stat("data.txt", &s);
-    // int numStructs = s.st_size / dataStructSize;
-    // printf("%d", numStructs);
-    fread(data, dataStructSize, 1, r_file);
-    printf("%d\n", data -> numChips);
+    FILE* r_file = fopen("data.txt", "rb");
+    struct playerData *data = malloc(dataStructSize);
+    while (fread(data, dataStructSize, 1, r_file) == 1) {
+        printf("Name: %s\n", data -> playerInitials);
+        printf("roundNumber: %d\n", data -> roundNumber);
+        printf("\n");
+    }
+    fclose(r_file);
+    free(data);
 }
 
 
