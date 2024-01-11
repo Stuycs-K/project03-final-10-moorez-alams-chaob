@@ -80,7 +80,7 @@ void evalHand(struct Hand* hand){ // sets a score based on the strength of the p
     sortHand(hand);
 
     //0-12 high card, 13-25 pair, 26-38 two pair, altScore used for lower pair (0-12), 39-51 trips, 
-    //52-61 straight (5-ace), 62-74 flush, 75-87 full house, 88-100 quads, 101-110 straight flush (royal flush is 110)
+    //52-61 straight (5 high-ace high), 62-74 flush, 75-87 full house, 88-100 quads, 101-110 straight flush (royal flush is 110)
 
     hand->score = 1;
 
@@ -180,14 +180,14 @@ void evalHand(struct Hand* hand){ // sets a score based on the strength of the p
         int previousFace = hand->combination[i].face;
         int nextFace = hand->combination[i+1].face;
         if (nextFace == previousFace + 1){
-            hand->score = 52 + hand->combination[4].face;
+            hand->score = 49 + hand->combination[4].face;
             if (i == 3){
                 printf("Straight. Score: %d\n", hand->score);
                 return;
             }
         }
         else if (nextFace == 12 && previousFace == 3 && hand->score > 1 && i == 3){ // special case of ace-5 straight
-            hand->score = 52 + hand->combination[3].face;
+            hand->score = 49 + hand->combination[3].face;
             printf("Straight. Score: %d\n", hand->score);
             return;
         }
@@ -276,7 +276,7 @@ int main(){
     struct Hand testHand2;
     struct Card card1, card2, card3, card4, card5;
     card1.face = 12, card1.suit = 0;
-    card2.face = 0, card2.suit = 1;
+    card2.face = 0, card2.suit = 0;
     card3.face = 1, card3.suit = 0;
     card4.face = 2, card4.suit = 0;
     card5.face = 3, card5.suit = 0;
