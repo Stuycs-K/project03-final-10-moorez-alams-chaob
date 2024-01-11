@@ -101,8 +101,9 @@ void evalHand(struct Hand* hand){ // sets a score based on the strength of the p
         }
     }
 
-    //check for quads
     int numSame;
+
+    //check for quads
     for (int i = 0; i < 5; i++){
         numSame = 1;
         for (int j = 0; j < 5; j++){
@@ -117,7 +118,32 @@ void evalHand(struct Hand* hand){ // sets a score based on the strength of the p
     }
 
     //check for full house
-    
+    int hasTrips;
+    int hasPair;
+    for (int i = 0; i < 5; i++){
+        numSame = 1;
+        for (int j = 0; j < 5; j++){
+            if (hand->combination[i].face == hand->combination[j].face){
+                numSame++;
+            }
+        }
+
+        if (numSame == 3){
+            hasTrips = 1;
+            hand->score = 75 + hand->combination[i].face;
+        }
+        else if (numSame == 2){
+            hasPair = 1;
+        }
+
+        if (hasTrips && hasPair){
+            return;
+        }
+        else{
+            hand->score = 0;
+        }
+    }
+
 }
 
 int main(){
