@@ -2,6 +2,7 @@
 #include <signal.h> 
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/socket.h>
 
 
 #ifndef SIGNALS_H
