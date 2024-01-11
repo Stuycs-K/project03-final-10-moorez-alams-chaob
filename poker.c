@@ -93,6 +93,12 @@ void evalHand(struct Hand* hand){ // sets a score based on the strength of the p
         if (nextSuit == previousSuit && (nextFace == previousFace + 1 || nextFace == 0 && previousFace == 12)){
             hand->score = 98 + hand->combination[4].face;
             if (i == 3){
+                if (hand->score == 110){
+                    printf("Royal flush. Score: %d\n", hand->score);
+                }
+                else{
+                    printf("Straight flush. Score: %d\n", hand->score);
+                }
                 return;
             }
         }
@@ -107,23 +113,24 @@ void evalHand(struct Hand* hand){ // sets a score based on the strength of the p
     for (int i = 0; i < 5; i++){
         numSame = 1;
         for (int j = 0; j < 5; j++){
-            if (hand->combination[i].face == hand->combination[j].face){
+            if (hand->combination[i].face == hand->combination[j].face && j != i){
                 numSame++;
             }
         }
         if (numSame == 4){
             hand->score = 88 + hand->combination[i].face;
+            printf("Four of a kind. Score: %d\n", hand->score);
             return;
         }
     }
 
     //check for full house
-    int hasTrips;
-    int hasPair;
+    int hasTrips = 0;
+    int hasPair = 0;
     for (int i = 0; i < 5; i++){
         numSame = 1;
         for (int j = 0; j < 5; j++){
-            if (hand->combination[i].face == hand->combination[j].face){
+            if (hand->combination[i].face == hand->combination[j].face && j != i){
                 numSame++;
             }
         }
@@ -137,6 +144,7 @@ void evalHand(struct Hand* hand){ // sets a score based on the strength of the p
         }
 
         if (hasTrips && hasPair){
+            printf("Full house. Score: %d\n", hand->score);
             return;
         }
         else{
@@ -144,6 +152,94 @@ void evalHand(struct Hand* hand){ // sets a score based on the strength of the p
         }
     }
 
+    //check for flush
+    hand->score = 1;
+    for (int i = 0; (i < 4) && (hand->score > 0); i++){
+        int previousSuit = hand->combination[i].suit;
+        int nextSuit = hand->combination[i+1].suit;
+        if (nextSuit == previousSuit){
+            hand->score = 62 + hand->combination[4].face;
+            if (i == 3){
+                printf("Flush. Score: %d\n", hand->score);
+                return;
+            }
+        }
+        else{
+            hand->score = 0;
+        }
+    }
+
+    //check for straight
+    hand->score = 1;
+    for (int i = 0; (i < 4) && (hand->score > 0); i++){
+        int previousFace = hand->combination[i].face;
+        int nextFace = hand->combination[i+1].face;
+        if (nextFace == previousFace + 1 || nextFace == 0 && previousFace == 12){
+            hand->score = 52 + hand->combination[4].face;
+            if (i == 3){
+                printf("Straight. Score: %d\n", hand->score);
+                return;
+            }
+        }
+        else{
+            hand->score = 0;
+        }
+    }
+
+    //check for trips
+    for (int i = 0; i < 5; i++){
+        numSame = 1;
+        for (int j = 0; j < 5; j++){
+            if (hand->combination[i].face == hand->combination[j].face && j != i){
+                numSame++;
+            }
+        }
+
+        if (numSame == 3){
+            hand->score = 39 + hand->combination[i].face;
+            printf("Three of a kind. Score: %d\n", hand->score);
+            return;
+        }
+    }
+
+    //check for two pair/pair
+    int pairs = 0;
+    int firstPairVal = 0;
+    int secondPairVal = 0;
+    for (int i = 0; i < 5; i++){
+        numSame = 1;
+        for (int j = 0; j < 5; j++){
+            if (hand->combination[i].face == hand->combination[j].face && j != i){
+                numSame++;
+            }
+        }
+
+        if (numSame == 2 && pairs == 0){
+            pairs++;
+            firstPairVal = hand->combination[i].face;
+        }
+        else if (numSame == 2 && pairs == 1 && firstPairVal != hand->combination[i].face){
+            pairs++;
+            secondPairVal = hand->combination[i].face;
+        }
+    }
+
+    if (pairs == 2){
+        hand->score = 26 + ((firstPairVal > secondPairVal) ? firstPairVal : secondPairVal);
+        hand->altScore = (firstPairVal < secondPairVal) ? firstPairVal : secondPairVal;
+        printf("Two pair. Score: %d, Lower pair score: %d\n", hand->score, hand->altScore);
+        return;
+    }
+    else if (pairs == 1){
+        hand->score = 13 + ((firstPairVal > secondPairVal) ? firstPairVal : secondPairVal);
+        printf("Pair. Score: %d\n", hand->score);
+        return;
+    }
+    else{
+        hand->score = hand->combination[4].face;
+        printf("High card. Score: %d\n", hand->score);
+        return;
+    }
 }
 
 int main(){
@@ -165,6 +261,21 @@ int main(){
     printf("Before sort: %s, %s, %s, %s, %s\n", cardName(testHand.combination[0]), cardName(testHand.combination[1]), cardName(testHand.combination[2]), cardName(testHand.combination[3]), cardName(testHand.combination[4]));
     sortHand(&testHand);
     printf("After sort: %s, %s, %s, %s, %s\n", cardName(testHand.combination[0]), cardName(testHand.combination[1]), cardName(testHand.combination[2]), cardName(testHand.combination[3]), cardName(testHand.combination[4]));
+
+    struct Hand testHand2;
+    struct Card card1, card2, card3, card4, card5;
+    card1.face = 10, card1.suit = 0;
+    card2.face = 4, card2.suit = 1;
+    card3.face = 3, card3.suit = 0;
+    card4.face = 6, card4.suit = 0;
+    card5.face = 9, card5.suit = 0;
+    testHand2.combination[0] = card1;
+    testHand2.combination[1] = card2;
+    testHand2.combination[2] = card3;
+    testHand2.combination[3] = card4;
+    testHand2.combination[4] = card5;
+
+    evalHand(&testHand2);
 
     return 0;
 }
