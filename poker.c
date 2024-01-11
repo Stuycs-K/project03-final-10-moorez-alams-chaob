@@ -90,7 +90,7 @@ void evalHand(struct Hand* hand){ // sets a score based on the strength of the p
         int previousFace = hand->combination[i].face;
         int nextSuit = hand->combination[i+1].suit;
         int nextFace = hand->combination[i+1].face;
-        if (nextSuit == previousSuit && (nextFace == previousFace + 1 || nextFace == 0 && previousFace == 12)){
+        if (nextSuit == previousSuit && (nextFace == previousFace + 1)){
             hand->score = 98 + hand->combination[4].face;
             if (i == 3){
                 if (hand->score == 110){
@@ -101,6 +101,11 @@ void evalHand(struct Hand* hand){ // sets a score based on the strength of the p
                 }
                 return;
             }
+        }
+        else if (nextSuit == previousSuit && (nextFace == 12 && previousFace == 3 && hand->score > 1 && i == 3)){ // special case of ace-5 straight flush
+            hand->score = 98 + hand->combination[3].face;
+            printf("Straight flush. Score: %d\n", hand->score);
+            return;
         }
         else{
             hand->score = 0;
@@ -174,12 +179,17 @@ void evalHand(struct Hand* hand){ // sets a score based on the strength of the p
     for (int i = 0; (i < 4) && (hand->score > 0); i++){
         int previousFace = hand->combination[i].face;
         int nextFace = hand->combination[i+1].face;
-        if (nextFace == previousFace + 1 || nextFace == 0 && previousFace == 12){
+        if (nextFace == previousFace + 1){
             hand->score = 52 + hand->combination[4].face;
             if (i == 3){
                 printf("Straight. Score: %d\n", hand->score);
                 return;
             }
+        }
+        else if (nextFace == 12 && previousFace == 3 && hand->score > 1 && i == 3){ // special case of ace-5 straight
+            hand->score = 52 + hand->combination[3].face;
+            printf("Straight. Score: %d\n", hand->score);
+            return;
         }
         else{
             hand->score = 0;
@@ -249,6 +259,7 @@ int main(){
 
     for (int i = 0; i < 52; i++){
         drawCard();
+        printf("%d, ", drawnCards[i].id);
     }
 
     clearBoard();
@@ -264,11 +275,11 @@ int main(){
 
     struct Hand testHand2;
     struct Card card1, card2, card3, card4, card5;
-    card1.face = 10, card1.suit = 0;
-    card2.face = 4, card2.suit = 1;
-    card3.face = 3, card3.suit = 0;
-    card4.face = 6, card4.suit = 0;
-    card5.face = 9, card5.suit = 0;
+    card1.face = 12, card1.suit = 0;
+    card2.face = 0, card2.suit = 1;
+    card3.face = 1, card3.suit = 0;
+    card4.face = 2, card4.suit = 0;
+    card5.face = 3, card5.suit = 0;
     testHand2.combination[0] = card1;
     testHand2.combination[1] = card2;
     testHand2.combination[2] = card3;
