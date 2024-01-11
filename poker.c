@@ -75,7 +75,7 @@ void sortHand(struct Hand* hand){ // will sort a given hand based on face values
     memcpy(hand->combination, cards, sizeof(hand->combination));
 }
 
-void evalHand(struct Hand* hand){ // sets a score based on the strength of the player's hand.
+void evalHand(struct Hand* hand){ // sets a score based on the strength of the player's hand. 
 
     sortHand(hand);
 
@@ -84,7 +84,7 @@ void evalHand(struct Hand* hand){ // sets a score based on the strength of the p
 
     hand->score = 1;
 
-    //check straight flush and royal flush, maybe add just flush and just straight checks in here too?
+    //check straight flush and royal flush
     for (int i = 0; (i < 4) && (hand->score > 0); i++){
         int previousSuit = hand->combination[i].suit;
         int previousFace = hand->combination[i].face;
@@ -92,11 +92,32 @@ void evalHand(struct Hand* hand){ // sets a score based on the strength of the p
         int nextFace = hand->combination[i+1].face;
         if (nextSuit == previousSuit && (nextFace == previousFace + 1 || nextFace == 0 && previousFace == 12)){
             hand->score = 98 + hand->combination[4].face;
+            if (i == 3){
+                return;
+            }
         }
         else{
             hand->score = 0;
         }
     }
+
+    //check for quads
+    int numSame;
+    for (int i = 0; i < 5; i++){
+        numSame = 1;
+        for (int j = 0; j < 5; j++){
+            if (hand->combination[i].face == hand->combination[j].face){
+                numSame++;
+            }
+        }
+        if (numSame == 4){
+            hand->score = 88 + hand->combination[i].face;
+            return;
+        }
+    }
+
+    //check for full house
+    
 }
 
 int main(){
