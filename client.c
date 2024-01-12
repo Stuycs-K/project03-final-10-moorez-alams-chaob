@@ -22,10 +22,12 @@ void parse_args(char* line, char** arg_ary){
 int main(int argc, char *argv[]){
     
     /*
-    char* line = "telnet 127.0.0.1 9998";
+    
+    char* line = "telnet 149.89.161.100 3444";
     char* args[5];
     parse_args(line, args);
     execvp(args[0], args);
+    
     */
     
     struct addrinfo *hints, *server;
@@ -34,6 +36,14 @@ int main(int argc, char *argv[]){
     hints->ai_family = AF_INET;
     hints->ai_socktype = SOCK_STREAM;
     hints->ai_flags = AI_PASSIVE;
+    getaddrinfo(NULL, PORT, hints, &results);
+    
+    int client_socket = socket(server->ai_family, server_ai->socktype, server->ai_protocol);
+    if (client_socket == -1){
+        err();
+    }
+    
+    
     
     
 }

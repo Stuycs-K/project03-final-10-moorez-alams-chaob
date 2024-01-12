@@ -22,7 +22,7 @@ void parse_args(char* line, char** arg_ary){
 int main(){
     struct addrinfo *hints, *results;
     hints = calloc(1, sizeof(struct addrinfo));
-    char* PORT = "0002";
+    char* PORT = "3444";
     
     hints->ai_family = AF_INET;
     hints->ai_socktype = SOCK_STREAM;
@@ -68,7 +68,7 @@ int main(){
                 buff[strlen(buff) - 1]= 0;
                 char* args[16];
                 args[0] = "cowsay";
-                //parse_args(buff, args);
+                parse_args(buff, args);
                 //execvp(args[0], args);
                 printf("Recieved from terminal: '%s'\n",buff);
             }
