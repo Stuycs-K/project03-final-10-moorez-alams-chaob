@@ -23,6 +23,9 @@ Zac worked on finishing up the file system as well as starting on the signalling
 ## 2024-01-11 (3:35 PM) Samin, Brandon, Zac
 Zac finished the system behind writing player data from the game into files, began work on helping Samin create the single client server. Samin was focused on a specific bug in how execvp ran in his program, as well as how to incorporate forking to fix it, and how to connect the server to the client. While Brandon worked on finishing up the full functionality of the poker game, leaving us with mostly only the networking aspects to work on.
 
+## 2024-01-12 (3:35 PM) Samin, Zac
+We started off by working out and designing our ideas for how the display would work, such as what information would be displayed, how, and in what order. We then evaluated Brandon's poker code in order to fix a bug in terms of how it evaluated the highest combinations. At the very end, Samin focused on the client file to connect to the server, implementing the client socket connection.
+
 ## Player 1
 
 ### 2024-01-02 - Brief description
