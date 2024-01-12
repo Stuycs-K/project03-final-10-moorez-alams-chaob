@@ -84,12 +84,15 @@ void evalHand(struct Hand* hand){ // sets a score based on the strength of the p
 
     hand->score = 1;
 
+    // check best combinations first
+
     //check straight flush and royal flush
     for (int i = 0; (i < 4) && (hand->score > 0); i++){
         int previousSuit = hand->combination[i].suit;
         int previousFace = hand->combination[i].face;
         int nextSuit = hand->combination[i+1].suit;
         int nextFace = hand->combination[i+1].face;
+        printf("Nextface: %d\n", nextFace);
         if (nextSuit == previousSuit && (nextFace == previousFace + 1)){
             hand->score = 98 + hand->combination[4].face;
             if (i == 3){
