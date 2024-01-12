@@ -104,7 +104,7 @@ void evalHand(struct Hand* hand){ // sets a score based on the strength of the p
         }
         else if (nextSuit == previousSuit && (nextFace == 12 && previousFace == 3 && hand->score > 1 && i == 3)){ // special case of ace-5 straight flush
             hand->score = 98 + hand->combination[3].face;
-            printf("Straight flush. Score: %d\n", hand->score);
+            printf("[ace 5] Straight flush. Score: %d\n", hand->score);
             return;
         }
         else{
