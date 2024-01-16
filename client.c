@@ -49,10 +49,12 @@ int main(int argc, char *argv[]){
         err();
     }
     
-    // USER INPUT (SCANF) HERE!
-    char message[] = "MESSAGE HERE!!";
-    send(client_socket, message, sizeof(message), 0);
-    
+    // get user input and send to server
+     printf("What message would you like to send to server: ");
+    char message[1024];
+    fgets(message, sizeof(message), stdin);
+    send(client_socket, message, strlen(message), 0);
+     
     // Recieve message from server
     char buffer[1024];
     recv(client_socket, buffer, sizeof(buffer), 0);
