@@ -64,13 +64,25 @@ int main(int argc, char *argv[]){
     send(client_socket, message, strlen(message), 0);
         
     // Recieve message from server
-    char buffer[1024];
-    recv(client_socket, buffer, sizeof(buffer), 0);
-    printf("Received from server: %s\n", buffer);
+    //char buffer[1024];
+    //recv(client_socket, buffer, sizeof(buffer), 0);
+    //printf("Received from server: %s\n", buffer);
         
     // Ok now close socket
     close(client_socket);
     freeaddrinfo(results);
+    
+    // checking for high score using shared memory
+    int *highScore;
+    int shmid = shmget(KEY, sizeof(int), 0640);
+    highScore = shmat(shmid, 0, 0);
+    if (score > *highScore) {
+        *highScore = score;
+        printf("New server-wide high score! YIPEEEEEE!!\n");
+    }
+    else printf("No high score just yet! Play again!\n");
+    shmdt(highScore);
+    
 
     return 0;
 }

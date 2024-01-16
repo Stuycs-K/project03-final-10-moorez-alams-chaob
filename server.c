@@ -20,6 +20,11 @@ void parse_args(char * line, char ** arg_ary) {
 }
 
 int main() {
+    
+    // shared memory stuff first
+    int shmid = shmget(KEY, sizeof(int), IPC_CREAT | 0640);
+    
+    
     struct addrinfo * hints, * results;
     hints = calloc(1, sizeof(struct addrinfo));
     char * PORT = "3444";
@@ -119,5 +124,8 @@ int main() {
             close(client_socket);
         }
     }
+    
+    //remove the shared memory at the end
+    shmctl(shmid, IPC_RMID, 0);
 
 }
