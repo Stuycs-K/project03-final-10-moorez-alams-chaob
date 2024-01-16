@@ -35,5 +35,6 @@ void evalHand(struct Hand* hand);
 void displayHand(struct Hand* hand);
 void discardCards(struct Hand* hand);
 void fillHand(struct Hand* hand);
+int pokerGame();
 
 #endif

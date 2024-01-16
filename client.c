@@ -1,4 +1,5 @@
 #include "server.h"
+#include "poker.h"
 #define PORT "3444"
 
 int err(){
@@ -30,6 +31,11 @@ int main(int argc, char *argv[]){
     
     */
     
+        
+        //wait(&status);
+    int score = pokerGame();
+    //int score = 0;
+    
     struct addrinfo *hints, *results;
     
     hints = calloc(1, sizeof(struct addrinfo));
@@ -48,31 +54,23 @@ int main(int argc, char *argv[]){
     if (connect(client_socket, results->ai_addr, results->ai_addrlen) == -1) {
         err();
     }
-    
-    int score;
-    int f = fork();
-    if (f == 0){
-        char* argument_array[2];
-        argument_array[0] = "./runme";
-        execvp(argument_array[0], argument_array);
-    }
-    
-    else{
-        // get user input and send to server
-        printf("Enter any text when you wish to start a game: ");
-        char message[1024];
-        fgets(message, sizeof(message), stdin);
-        send(client_socket, message, strlen(message), 0);
         
-        // Recieve message from server
-        char buffer[1024];
-        recv(client_socket, buffer, sizeof(buffer), 0);
-        printf("Received from server: %s\n", buffer);
+    // get user input and send to server
+    //printf("Enter any text when you wish to start a game: ");
+    printf("Sending your gamescore to server...\n");
+    char message[1024];
+    //fgets(message, sizeof(message), stdin);
+    sprintf(message, "%d", score);
+    send(client_socket, message, strlen(message), 0);
         
-        // Ok now close socket
-        close(client_socket);
-        freeaddrinfo(results);
-    }
+    // Recieve message from server
+    char buffer[1024];
+    recv(client_socket, buffer, sizeof(buffer), 0);
+    printf("Received from server: %s\n", buffer);
+        
+    // Ok now close socket
+    close(client_socket);
+    freeaddrinfo(results);
 
     return 0;
 }

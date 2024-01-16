@@ -77,18 +77,18 @@ int main() {
         if (FD_ISSET(listen_socket, & read_fds)) {
             //accept the connection
             int client_socket = accept(listen_socket, (struct sockaddr * ) & client_address, & sock_size);
-            printf("Connected, waiting for data.\n");
+            printf("\nConnected, waiting for data.\n");
 
             //read the whole buff
             read(client_socket, buff, sizeof(buff));
             //trim the string
-            buff[strlen(buff) - 1] = 0; //clear newline
-            if (buff[strlen(buff) - 1] == 13) {
+            //buff[strlen(buff) - 1] = 0; //clear newline
+            //if (buff[strlen(buff) - 1] == 13) {
                 //clear windows line ending
-                buff[strlen(buff) - 1] = 0;
-            }
+            //    buff[strlen(buff) - 1] = 0;
+            //}
 
-            //printf("\nRecieved from client '%s'\n", buff);
+            printf("Recieved from client '%s'\n", buff);
             
             close(client_socket);
         }

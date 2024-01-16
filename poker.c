@@ -303,7 +303,7 @@ void fillHand(struct Hand* hand){
 }
 
 
-int main(){
+int pokerGame(){
     srand(time(NULL));
     
     struct Hand player;
@@ -327,6 +327,8 @@ int main(){
         break; // implementing functionality for more rounds later
         
     }
+    
+    return player.score;
     
     /*
     // previous main function
