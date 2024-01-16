@@ -15,6 +15,6 @@
 #ifndef SERVER_H
 #define SERVER_H
 
-#define KEY 0111
+#define KEY 0112
 
 #endif
