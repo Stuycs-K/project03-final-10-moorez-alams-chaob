@@ -263,6 +263,21 @@ void displayHand(struct Hand* hand){
     }
 }
 
+// had to roll back a large chunk of the poker functionality
+// focus of the game, get highest score by discarding cards
+void discardCards(struct Hand* hand){
+    int discardCount;
+    printf("How many cards would you like to discard?\n");
+    scanf("%d", &discardCount);
+    
+    // input bounds checker
+    if (discardCount < 0 || discardCount > 5){
+        printf("Invalid input. Please enter a value between 0-5.");
+        scanf("%d", &discardCount);
+    }
+    
+}
+
 int main(){
     srand(time(NULL));
     
