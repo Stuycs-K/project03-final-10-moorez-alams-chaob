@@ -11,7 +11,7 @@ void parse_args(char* line, char** arg_ary){
     
     int i = 1;
     char* x;
-    while(x = strsep(&line, " ")) {
+    while((x = strsep(&line, " "))) {
         arg_ary[i] = malloc(strlen(x) + 1);
         strcpy(arg_ary[i++], x);
     }
@@ -45,8 +45,22 @@ int main(int argc, char *argv[]){
         err();
     }
     
-    struct sockaddr_in *server = (struct sockaddr_in *)results->ai_addr;
+    if (connect(client_socket, results->ai_addr, results->ai_addrlen) == -1) {
+        err();
+    }
     
-    freeaddrinfo(results); 
+    // USER INPUT (SCANF) HERE!
+    char message[] = "MESSAGE HERE!!";
+    send(client_socket, message, sizeof(message), 0);
     
+    // Recieve message from server
+    char buffer[1024];
+    recv(client_socket, buffer, sizeof(buffer), 0);
+    printf("Received from server: %s\n", buffer);
+
+    // Ok now close socket
+    close(client_socket);
+    freeaddrinfo(results);
+
+    return 0;
 }
