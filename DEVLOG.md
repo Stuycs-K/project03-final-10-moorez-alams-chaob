@@ -26,18 +26,5 @@ Zac finished the system behind writing player data from the game into files, beg
 ## 2024-01-12 (3:35 PM) Samin, Zac
 We started off by working out and designing our ideas for how the display would work, such as what information would be displayed, how, and in what order. We then evaluated Brandon's poker code in order to fix a bug in terms of how it evaluated the highest combinations. At the very end, Samin focused on the client file to connect to the server, implementing the client socket connection.
 
-## Player 1
-
-### 2024-01-02 - Brief description
-Expanded description including how much time was spent on task.
-
-### 2024-01-03 - Brief description
-Expanded description including how much time was spent on task.
-
-## Player 2
-
-### 2024-01-02 - Brief description
-Expanded description including how much time was spent on task.
-
-### 2024-01-03 - Brief description
-Expanded description including how much time was spent on task.
+## 2024-01-16 (6:37 AM) Samin, Zac
+During the three day weekend we focused on finishing and polishing up the game, by combining the networking and literal poker elemtns that we had created together. Zac had finished up the server-client relationship, making a sophisticated server file that multiple clients could connect to at one time. Zac also worked on implementing systems for storing the data of the game in a file, however as the time for the project grew shorter, it became increasingly impossible to implement. Samin worked down the full scope of the poker game to fit time constraints, making a game more focused on evaluating the combinations rather than folding/raising. He then combined the server that Zac made with this poker game, running it from the client side, as well as using shared memory in order to store a game wide high score that would be displayed to the clients.
