@@ -294,9 +294,22 @@ void discardCards(struct Hand* hand){
     
 }
 
+// fills the player's hand with 5 cards from the deck
+void fillHand(struct Hand* hand){
+    
+    for (int i = 0; i < 5; i++){
+        hand->combination[i] = drawCard();
+    }
+}
+
+
 int main(){
     srand(time(NULL));
     
+    
+    /*
+    // previous main function
+    // meant to work for a system with much greater poker capabilities but scrapped due to time
     clearBoard(); // must be run before any game/round starts.
 
     for (int i = 0; i < 52; i++){
@@ -331,4 +344,5 @@ int main(){
     evalHand(&testHand2);
 
     return 0;
+    */
 }
