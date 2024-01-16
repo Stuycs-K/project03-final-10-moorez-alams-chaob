@@ -10,6 +10,12 @@ Samin Alam, Zac Moore, Brandon Chao
 
 The objective of our game is to test people's abilities to determine how good their poker hand is, and what cards they need to randomly change in order to maximize points. Our game is connected to a server that multiple other clients can connect to, so they all play and then their scores are sent to the server, displaying each user's score next to their username. The players can look to the different scores on the screen of the server and compare with their own scores. This ability to compare is strengethed with the fact that if a player gets a high score, they will be immediately notified by the game, allowing them to taunt their opponents and flex their score as much as they can.
 
+Potential Bugs!:
+
+- Can't connect to the server from a different computer altogether
+- Sometimes the score displayed by the server and the score displayed by the client are off by a digit (eg. 92 vs 9)
+- The shared memory segment that holds the high score remains the same across multiple runs of the server, rather than only being consistent across one instance of a server.
+
 
 ### Instructions:
 
