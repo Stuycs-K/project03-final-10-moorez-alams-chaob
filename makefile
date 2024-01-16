@@ -1,9 +1,11 @@
-compile runme: poker.o
-	@gcc -o runme poker.o
+default: compile
+compile: poker.o
+  @gcc client.c -o client
+  @gcc server.c -o server
+  @gcc poker.o -o runme
 poker.o: poker.c poker.h
-	@gcc -c poker.c
-run: runme
-	@./runme
+  @gcc -c poker.c
 clean:
-	rm *.o
-	rm runme
+  rm client
+  rm server
+  rm runme
