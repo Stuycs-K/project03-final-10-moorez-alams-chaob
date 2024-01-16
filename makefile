@@ -1,4 +1,4 @@
-compile: poker.o
+compile runme: poker.o
 	@gcc -o runme poker.o
 poker.o: poker.c poker.h
 	@gcc -c poker.c
