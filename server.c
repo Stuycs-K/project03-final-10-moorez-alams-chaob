@@ -88,7 +88,8 @@ int main() {
                 buff[strlen(buff) - 1] = 0;
             }
 
-            printf("\nRecieved from client '%s'\n", buff);
+            //printf("\nRecieved from client '%s'\n", buff);
+            
             close(client_socket);
         }
     }

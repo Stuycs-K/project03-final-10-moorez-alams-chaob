@@ -49,20 +49,30 @@ int main(int argc, char *argv[]){
         err();
     }
     
-    // get user input and send to server
-     printf("What message would you like to send to server: ");
-    char message[1024];
-    fgets(message, sizeof(message), stdin);
-    send(client_socket, message, strlen(message), 0);
-     
-    // Recieve message from server
-    char buffer[1024];
-    recv(client_socket, buffer, sizeof(buffer), 0);
-    printf("Received from server: %s\n", buffer);
-
-    // Ok now close socket
-    close(client_socket);
-    freeaddrinfo(results);
+    int score;
+    int f = fork();
+    if (f == 0){
+        char* argument_array[2];
+        argument_array[0] = "./runme";
+        execvp(argument_array[0], argument_array);
+    }
+    
+    else{
+        // get user input and send to server
+        printf("Enter any text when you wish to start a game: ");
+        char message[1024];
+        fgets(message, sizeof(message), stdin);
+        send(client_socket, message, strlen(message), 0);
+        
+        // Recieve message from server
+        char buffer[1024];
+        recv(client_socket, buffer, sizeof(buffer), 0);
+        printf("Received from server: %s\n", buffer);
+        
+        // Ok now close socket
+        close(client_socket);
+        freeaddrinfo(results);
+    }
 
     return 0;
 }
