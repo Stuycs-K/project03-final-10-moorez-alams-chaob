@@ -1,5 +1,6 @@
 #include "playerData.h"
 
+// Writes a struct containing the params to "data.txt". Does not use new lines, is NOT cross-platform compatible
 void writeData (int numChips, int roundNumber, char playerInitials[]) {
     // define struct, assign values 
     int dataStructSize = sizeof(struct playerData);
@@ -15,6 +16,7 @@ void writeData (int numChips, int roundNumber, char playerInitials[]) {
     free(data);
 }
 
+// Reads all structs from "data.txt" and prints them out.
 void readData () {
     int dataStructSize = sizeof(struct playerData);
     FILE* r_file = fopen("data.txt", "rb");
