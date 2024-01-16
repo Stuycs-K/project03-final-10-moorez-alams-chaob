@@ -276,6 +276,22 @@ void discardCards(struct Hand* hand){
         scanf("%d", &discardCount);
     }
     
+    // prompting the player to select which cards they would like to discard
+    for (int i = 0; i < discardCount; i++){
+        int index;
+        printf("Which card would you like to remove?: ");
+        scanf("%d", &index);
+        
+        // input bounds checker
+        if (index < 0 || index > 5){
+            printf("Invalid input. Please enter a value between 0-5.");
+            scanf("%d", &index);
+        }
+        
+        hand->combination[index] = drawCard();
+    }
+    
+    
 }
 
 int main(){
