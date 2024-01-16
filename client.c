@@ -33,6 +33,9 @@ int main(int argc, char *argv[]){
     
         
         //wait(&status);
+    char username[256];
+    printf("Type a username: ");
+    fgets(username, sizeof(username), stdin);
     int score = pokerGame();
     //int score = 0;
     
@@ -59,8 +62,7 @@ int main(int argc, char *argv[]){
     //printf("Enter any text when you wish to start a game: ");
     printf("Sending your gamescore to server...\n");
     char message[1024];
-    //fgets(message, sizeof(message), stdin);
-    sprintf(message, "%d", score);
+    sprintf(message, "%s %d", username, score);
     send(client_socket, message, strlen(message), 0);
         
     // Recieve message from server

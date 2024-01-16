@@ -93,7 +93,7 @@ int main() {
             //    buff[strlen(buff) - 1] = 0;
             //}
 
-            printf("Recieved from client '%s'\n", buff);
+            printf("Score from %s\n", buff);
             
             close(client_socket);
         }
