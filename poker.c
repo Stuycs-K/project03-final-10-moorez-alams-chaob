@@ -255,6 +255,14 @@ void evalHand(struct Hand* hand){ // sets a score based on the strength of the p
     }
 }
 
+//display function
+void displayHand(struct Hand* hand){
+    printf("Your Hand:\n");
+    for (int i = 0; i < 5; i++){
+        printf("[%d] %s\n", i, cardName(hand->combination[i]));
+    }
+}
+
 int main(){
     srand(time(NULL));
     
