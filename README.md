@@ -3,11 +3,11 @@
 
 ### Poker? I Hardly Know Her!
 
-Group Members Here
+### Group Members
+Samin Alam, Zac Moore, Brandon Chao
        
 ### Project Description:
 
-Explain what is this project.
   
 ### Instructions:
 
