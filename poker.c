@@ -306,6 +306,25 @@ void fillHand(struct Hand* hand){
 int main(){
     srand(time(NULL));
     
+    struct Hand player;
+    
+    int round = 0;
+    while (1){
+        clearBoard();
+        fillHand(&player); // allocate player 5 cards
+        
+        displayHand(&player); // prompt the player for their initial hand
+        discardCards(&player);
+        
+        printf("\n Your New Hand: \n"); // shows the hand after player input
+        displayHand(&player);
+        
+        evalHand(&player); // evaluate the player's score for their round
+        printf("Your score for round %d: %d\n", round++, playerHand.score);
+        
+        break; // implementing functionality for more rounds later
+        
+    }
     
     /*
     // previous main function
