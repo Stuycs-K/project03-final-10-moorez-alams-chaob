@@ -27,7 +27,13 @@ struct Hand{
     int altScore; // used for comparing lower pair of a two pair
 };
 
+char* cardName(struct Card n);
+struct Card drawCard();
+void clearBoard();
 void sortHand(struct Hand* hand);
 void evalHand(struct Hand* hand);
+void displayHand(struct Hand* hand);
+void discardCards(struct Hand* hand);
+void fillHand(struct Hand* hand);
 
 #endif
