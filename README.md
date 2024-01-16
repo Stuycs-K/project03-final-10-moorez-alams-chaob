@@ -2,7 +2,7 @@
 # Poker? I Hardly Know Her!
 
 ### Group Members
-Team Name: Poker Crew
+Team Name: Poker Crew\n
 Samin Alam, Zac Moore, Brandon Chao
        
 ### Project Description:
