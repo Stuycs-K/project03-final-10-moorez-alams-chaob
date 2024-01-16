@@ -12,7 +12,7 @@ The client will join the server and then the server will wait for another client
   
 # Technical Details:
 Pipes, sockets, and processes (forking + exec) will be used to allow for simultaneous client connection.
-Files will be created and append player data per round (i.e how many chips each player has each round).
+Files will be created and append player data per round (i.e how many chips each player has each round). 
 Signals can be used to allow for players to elegantly disconnect during a live round.
 Structs can be used to format the text data of the current board and each player's hand to be displayed on each player's screen respectively.
 
